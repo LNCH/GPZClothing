@@ -78,4 +78,18 @@ class ProductCategoriesTest extends TestCase
         $response->assertRedirect();
         $response->assertSessionHas('success');
     }
+
+    /** @test */
+    public function it_can_delete_a_category(): void
+    {
+        $category = factory(Category::class)->create();
+
+        $response = $this->delete(route('admin.product-categories.destroy', $category));
+
+        $response->assertRedirect(route('admin.product-categories.index'));
+        $response->assertSessionHas('success');
+        $this->assertDatabaseMissing('product_categories', [
+            'name' => $category->name
+        ]);
+    }
 }
