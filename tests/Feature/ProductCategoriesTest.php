@@ -25,4 +25,12 @@ class ProductCategoriesTest extends TestCase
 
         $this->assertEquals('Test category description', $category->description);
     }
+
+    /** @test */
+    public function a_product_category_has_a_status(): void
+    {
+        $category = factory(Category::class)->create(['status' => Category::STATUS_ACTIVE]);
+
+        $this->assertEquals(Category::STATUS_ACTIVE, $category->status);
+    }
 }
