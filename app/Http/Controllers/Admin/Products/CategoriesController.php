@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $categories = Category::all();
@@ -15,11 +20,22 @@ class CategoriesController extends Controller
         return view('admin.product-categories.index', compact('categories'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         return view('admin.product-categories.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $category = Category::create($request->all());
@@ -28,16 +44,35 @@ class CategoriesController extends Controller
             ->with('success', 'Category created successfully!');
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param Category $productCategory
+     * @return \Illuminate\Http\Response
+     */
     public function show(Category $productCategory)
     {
         return view('admin.product-categories.show', ['category' => $productCategory]);
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param Category $productCategory
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Category $productCategory)
     {
         return view('admin.product-categories.edit', ['category' => $productCategory]);
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Category                 $productCategory
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function update(Category $productCategory, Request $request)
     {
         $productCategory->update($request->all());
@@ -46,6 +81,13 @@ class CategoriesController extends Controller
             ->with('success', 'Category updated successfully!');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Category $productCategory
+     * @return \Illuminate\Http\Response
+     * @throws \Exception
+     */
     public function destroy(Category $productCategory)
     {
         $productCategory->delete();
