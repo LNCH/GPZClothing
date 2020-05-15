@@ -14,4 +14,17 @@ class CategoriesController extends Controller
 
         return view('admin.product-categories.index', compact('categories'));
     }
+
+    public function create()
+    {
+        return view('admin.product-categories.create');
+    }
+
+    public function store(Request $request)
+    {
+        $category = Category::create($request->all());
+
+        return redirect(route('admin.product-categories.index'))
+            ->with('success', 'Category created successfully!');
+    }
 }
