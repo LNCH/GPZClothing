@@ -32,4 +32,17 @@ class CategoriesController extends Controller
     {
         return view('admin.product-categories.show', ['category' => $productCategory]);
     }
+
+    public function edit(Category $productCategory)
+    {
+        return view('admin.product-categories.edit', ['category' => $productCategory]);
+    }
+
+    public function update(Category $productCategory, Request $request)
+    {
+        $productCategory->update($request->all());
+
+        return redirect(route('admin.product-categories.show', $productCategory))
+            ->with('success', 'Category updated successfully!');
+    }
 }

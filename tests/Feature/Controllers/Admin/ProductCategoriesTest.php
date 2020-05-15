@@ -53,4 +53,29 @@ class ProductCategoriesTest extends TestCase
         $response->assertViewIs('admin.product-categories.show');
         $response->assertViewHas('category');
     }
+
+    /** @test */
+    public function it_has_an_edit_page(): void
+    {
+        $category = factory(Category::class)->create();
+
+        $response = $this->get(route('admin.product-categories.edit', $category));
+
+        $response->assertStatus(200);
+        $response->assertViewIs('admin.product-categories.edit');
+        $response->assertViewHas('category');
+    }
+
+    /** @test */
+    public function it_can_update_a_category(): void
+    {
+        $category = factory(Category::class)->create();
+
+        $response = $this->patch(route('admin.product-categories.update', $category), [
+            'name' => 'New Category Name'
+        ]);
+
+        $response->assertRedirect();
+        $response->assertSessionHas('success');
+    }
 }
