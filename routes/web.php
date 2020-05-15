@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('admin')->as('admin.')->group(function() {
+
+    Route::resource('admin/product-categories', 'Admin\Products\CategoriesController');
+
+});
