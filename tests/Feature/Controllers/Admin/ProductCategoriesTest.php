@@ -41,4 +41,16 @@ class ProductCategoriesTest extends TestCase
         $response->assertRedirect(route('admin.product-categories.index'));
         $response->assertSessionHas('success');
     }
+
+    /** @test */
+    public function it_can_display_a_single_category(): void
+    {
+        $category = factory(Category::class)->create();
+
+        $response = $this->get(route('admin.product-categories.show', $category));
+
+        $response->assertStatus(200);
+        $response->assertViewIs('admin.product-categories.show');
+        $response->assertViewHas('category');
+    }
 }

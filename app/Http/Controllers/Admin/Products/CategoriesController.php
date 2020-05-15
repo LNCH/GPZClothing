@@ -27,4 +27,9 @@ class CategoriesController extends Controller
         return redirect(route('admin.product-categories.index'))
             ->with('success', 'Category created successfully!');
     }
+
+    public function show(Category $productCategory)
+    {
+        return view('admin.product-categories.show', ['category' => $productCategory]);
+    }
 }
